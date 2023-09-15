@@ -46,14 +46,18 @@ with open("token.txt", "r") as f:
 
 while True:
         channel_id = channel_id.strip()
+    
+        payload = {
+            'content': random.choice(words).strip()
+        }
 
         headers = {
             'Authorization': authorization
         }
 
-        r = requests.post(f"https://discord.com/api/v9/channels/{channel_id}/messages", headers=headers)
+        r = requests.post(f"https://discord.com/api/v9/channels/{channel_id}/messages", data=payload, headers=headers)
         print(Fore.WHITE + "Sent message: ")
-        print(Fore.YELLOW ['content'])
+        print(Fore.YELLOW + payload['content'])
 
         response = requests.get(f'https://discord.com/api/v9/channels/{channel_id}/messages', headers=headers)
 
